@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bruta Lanches</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">𝐵𝑟𝑢𝑡𝑎 𝐿𝑎𝑛𝑐ℎ𝑒</div>
+      <div id="status-loja" class="status-loja"></div>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a class="corBtn" href="#home">𝐻𝑜𝑚𝑒</a></li>
+        <li><a class="corBtn" href="#lanches">𝘓𝘢𝘯𝘤𝘩𝘦𝘴</a></li>
+        <li><a class="corBtn" href="#porcoes">𝘗𝘰𝘳çõ𝘦𝘴</a></li>
+        <li><a class="corBtn" href="#bebidas">𝘉𝘦𝘣𝘪𝘥𝘢𝘴</a></li>
+        <li><a class="corBtn" href="#contatos">𝘊𝘰𝘯𝘵𝘢𝘵𝘰𝘴</a></li>
+      </ul>
+    </nav>
+
+    <!-- Campo de busca fixo abaixo da navbar -->
+    <div class="busca-container">
+      <input
+        type="text"
+        id="campoBusca"
+        placeholder="Buscar no cardápio..."
+        class="campo-busca"
+        oninput="filtrarCardapio()"
+      />
+      <button
+        id="btn-ver-pedido"
+        onclick="abrirModalPedido()"
+        class="btn-finalizar"
+        style="display: none"
+      >
+        <i class="fas fa-shopping-cart"></i>
+      </button>
+    </div>
+
+    <header class="header" id="home">
+      <div class="banner-header">
+        <img class="banner" src="galery/banner.png" alt="banner" />
+      </div>
+    </header>
+
+    <section id="cardapio">
+      <h2 id="lanches">𝑳𝒂𝒏𝒄𝒉𝒆𝒔 🍔</h2>
+      <div class="card-grid">
+        <div class="card">
+          <img
+            src="galery/mistoquente.jpeg"
+            alt="Misto Quente"
+            class="card-img"
+          />
+          <div class="card-content">
+            <h3 class="card-title">Misto Quente</h3>
+            <p class="card-desc">Pão, presunto, queijo</p>
+            <span class="card-preco">R$10,00</span>
+            <button
+              onclick="adicionarItem('Misto Quente')"
+              class="btn-adicionar"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="galery/dog.jpeg" alt="Dog" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">Dog</h3>
+            <p class="card-desc">
+              Pão, hambúrguer, presunto, queijo, salsicha, batata palha
+            </p>
+            <span class="card-preco">R$18,00</span>
+            <button onclick="adicionarItem('Dog')" class="btn-adicionar">
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="galery/dogduplo.jpeg" alt="Dog Duplo" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">Dog Duplo</h3>
+            <p class="card-desc">
+              2 hambúrgueres, 2 presuntos, 2 queijos, salsicha, batata palha,
+              milho
+            </p>
+            <span class="card-preco">R$20,00</span>
+            <button onclick="adicionarItem('Dog Duplo')" class="btn-adicionar">
+              Adicionar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <h2>𝑬𝒔𝒑𝒆𝒄𝒊𝒂𝒊𝒔 🌟</h2>
+      <div class="card-grid">
+        <div class="card">
+          <img src="galery/xsalada.jpeg" alt="X-Salada" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">X-Salada</h3>
+            <p class="card-desc">
+              Pão, hambúrguer, presunto, queijo, tomate, alface, maionese rosê
+            </p>
+            <span class="card-preco">R$23,00</span>
+            <button onclick="adicionarItem('X-Salada')" class="btn-adicionar">
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="galery/xbacon.jpeg" alt="X-Bacon" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">X-Bacon</h3>
+            <p class="card-desc">
+              Pão, hambúrguer, presunto, queijo, bacon, alface
+            </p>
+            <span class="card-preco">R$25,00</span>
+            <button onclick="adicionarItem('X-Bacon')" class="btn-adicionar">
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="galery/xcalabresa.jpeg"
+            alt="X-Calabresa"
+            class="card-img"
+          />
+          <div class="card-content">
+            <h3 class="card-title">X-Calabresa</h3>
+            <p class="card-desc">
+              Pão, hambúrguer, presunto, queijo, calabresa, alface
+            </p>
+            <span class="card-preco">R$26,00</span>
+            <button
+              onclick="adicionarItem('X-Calabresa')"
+              class="btn-adicionar"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="galery/xfrango.jpeg" alt="X-Frango" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">X-Frango</h3>
+            <p class="card-desc">
+              Pão, hambúrguer, presunto, queijo, frango, alface
+            </p>
+            <span class="card-preco">R$24,00</span>
+            <button onclick="adicionarItem('X-Frango')" class="btn-adicionar">
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="galery/xtudo.jpeg" alt="X-Tudo" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">X-Tudo</h3>
+            <p class="card-desc">
+              Pão, hambúrguer, presunto, queijo, bacon, calabresa, ovo,frango,
+              alface,tomate,batata palha
+            </p>
+            <span class="card-preco">R$30,00</span>
+            <button onclick="adicionarItem('X-Tudo')" class="btn-adicionar">
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="galery/xegg.jpeg" alt="X-Egg" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">X-Egg</h3>
+            <p class="card-desc">
+              Pão, hambúrguer, presunto, queijo, ovo, alface
+            </p>
+            <span class="card-preco">R$26,00</span>
+            <button onclick="adicionarItem('X-Egg')" class="btn-adicionar">
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="galery/megabruta.jpg" alt="Mega Bruta" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">Mega Bruta</h3>
+            <p class="card-desc">
+              2 hambúrgueres, 2 presuntos, 2 queijos, frango, bacon, calabresa,
+              ovo, salsicha, alface, tomate, batata palha
+            </p>
+            <span class="card-preco">R$30,00</span>
+            <button onclick="adicionarItem('Mega Bruta')" class="btn-adicionar">
+              Adicionar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Adicionais -->
+      <h2>𝑨𝒅𝒊𝒄𝒊𝒐𝒏𝒂𝒊𝒔 ➕</h2>
+      <div class="card-grid">
+        <div class="card">
+          <img
+            src="galery/hamburguer.jpeg"
+            alt="Adicional de Hambúrguer"
+            class="card-img"
+          />
+          <div class="card-content">
+            <h3 class="card-title">Adicional</h3>
+            <p class="card-desc">Hambúrguer</p>
+            <span class="card-preco">R$4,00</span>
+            <button
+              onclick="adicionarItem('Adicional de Hambúrguer')"
+              class="btn-adicionar"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="galery/bacon.jpeg"
+            alt="Adicional de Bacon"
+            class="card-img"
+          />
+          <div class="card-content">
+            <h3 class="card-title">Adicional</h3>
+            <p class="card-desc">Bacon</p>
+            <span class="card-preco">R$4,00</span>
+            <button
+              onclick="adicionarItem('Adicional de Bacon')"
+              class="btn-adicionar"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="galery/calabresa.jpeg"
+            alt="Adicional de Calabresa"
+            class="card-img"
+          />
+          <div class="card-content">
+            <h3 class="card-title">Adicional</h3>
+            <p class="card-desc">Calabresa</p>
+            <span class="card-preco">R$3,00</span>
+            <button
+              onclick="adicionarItem('Adicional de Calabresa')"
+              class="btn-adicionar"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="galery/ovo.jpeg" alt="Adicional de Ovo" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">Adicional</h3>
+            <p class="card-desc">Ovo</p>
+            <span class="card-preco">R$2,00</span>
+            <button
+              onclick="adicionarItem('Adicional de Ovo')"
+              class="btn-adicionar"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Porções -->
+      <h2 id="porcoes">𝑷𝒐𝒓çõ𝒆𝒔</h2>
+      <div class="card-grid">
+        <div class="card">
+          <img
+            src="galery/batatacombacon.jpeg"
+            alt="Batata com bacon"
+            class="card-img"
+          />
+          <div class="card-content">
+            <h3 class="card-title">Porção</h3>
+            <p class="card-desc">Batata com bacon</p>
+            <span class="card-preco">R$30,00</span>
+            <button
+              onclick="adicionarItem('Porção de Batata com bacon')"
+              class="btn-adicionar"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="galery/frangocomlimão.jpeg"
+            alt="Frango com limão"
+            class="card-img"
+          />
+          <div class="card-content">
+            <h3 class="card-title">Porção</h3>
+            <p class="card-desc">Frango com rodelas de limão</p>
+            <span class="card-preco">R$35,00</span>
+            <button
+              onclick="adicionarItem('Porção de Frango com Rodelas de limão')"
+              class="btn-adicionar"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="galery/linguiçacalabresaazeitona.jpeg"
+            alt="Linguiça acebolada"
+            class="card-img"
+          />
+          <div class="card-content">
+            <h3 class="card-title">Porção</h3>
+            <p class="card-desc">Linguiça acebolada com azeitona</p>
+            <span class="card-preco">R$18,00</span>
+            <button
+              onclick="adicionarItem('Porção de Linguiça Acebolada com azeitona')"
+              class="btn-adicionar"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bebidas -->
+      <h2 id="bebidas">𝑩𝒆𝒃𝒊𝒅𝒂𝒔</h2>
+      <div class="card-grid">
+        <div class="card">
+          <img src="galery/agua.jpeg" alt="Água" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">Bebida</h3>
+            <p class="card-desc">Água</p>
+            <span class="card-preco">R$2,00</span>
+            <button
+              onclick="adicionarItem('Bebida: Água')"
+              class="btn-adicionar"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="galery/coca350.jpeg"
+            alt="Coca-Cola 350ml"
+            class="card-img"
+          />
+          <div class="card-content">
+            <h3 class="card-title">Bebida</h3>
+            <p class="card-desc">Coca-Cola 350ml</p>
+            <span class="card-preco">R$6,50</span>
+            <button
+              onclick="adicionarItem('Bebida: Coca-Cola 350ml')"
+              class="btn-adicionar"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="galery/coca600.jpeg"
+            alt="Coca-Cola 600ml"
+            class="card-img"
+          />
+          <div class="card-content">
+            <h3 class="card-title">Bebida</h3>
+            <p class="card-desc">Coca-Cola 600ml</p>
+            <span class="card-preco">R$8,00</span>
+            <button
+              onclick="adicionarItem('Bebida: Coca-Cola 600ml')"
+              class="btn-adicionar"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="galery/coca2l.jpeg" alt="Coca-Cola 2L" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">Bebida</h3>
+            <p class="card-desc">Coca-Cola 2L</p>
+            <span class="card-preco">R$10,00</span>
+            <button
+              onclick="adicionarItem('Bebida: Coca-cola 2L')"
+              class="btn-adicionar"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="galery/guarana.jpeg" alt="Guaraná" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">Bebida</h3>
+            <p class="card-desc">Guaraná</p>
+            <span class="card-preco">R$8,00</span>
+            <button
+              onclick="adicionarItem('Bebida: Guaraná')"
+              class="btn-adicionar"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="galery/fantalaranjauva.jpeg" alt="Fanta" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">Bebida</h3>
+            <p class="card-desc">Fanta Laranja ou Uva</p>
+            <span class="card-preco">R$10,00</span>
+            <button
+              onclick="adicionarItem('Bebida: Fanta Laranja ou Uva')"
+              class="btn-adicionar"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container-finalizar">
+      <button
+        id="btn-ver-pedido"
+        onclick="abrirModalPedido()"
+        class="btn-finalizar"
+      >
+        <i class="fas fa-shopping-cart"></i>
+      </button>
+    </div>
+
+    <div id="modalMesa" class="modal">
+      <div class="modal-content">
+        <h3>Informe sua mesa ou selecione Entrega</h3>
+        <input
+          type="text"
+          id="inputMesa"
+          placeholder="Digite o númeroda mesa"
+        />
+        <div class="modal-buttons">
+          <button onclick="confirmarMesa()">Confirmar Mesa</button>
+          <button onclick="selecionarEntrega()">Entrega</button>
+          <button style="margin-bottom: 15px" onclick="selecionarRetirada()">
+            Retirada
+          </button>
+        </div>
+        <button class="btnFechar" onclick="fecharModalMesa()">Fechar</button>
+      </div>
+    </div>
+
+    <div class="container_scrool">
+      <div class="scrool_btn">
+        <button class="btn_scrool" id="btnScrool">
+          <i class="fas fa-arrow-up"></i>
+        </button>
+      </div>
+    </div>
+
+    <footer id="contatos">
+      <p>
+        &copy; <span id="ano"></span> Bruta lanches/Pr. Todos os direitos
+        reservados.
+      </p>
+
+      <p>Entre em contato com a gente é faça seu pedido manualmente!</p>
+
+      <a
+        href="https://wa.me/44997014764"
+        target="_blank"
+        style="color: green; font-size: 24px"
+      >
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+
+      <p>Conheça nosso instagram:</p>
+
+      <a
+        href="https://www.instagram.com/dianeperassoli/"
+        target="_blank"
+        style="color: rgb(220, 69, 207); font-size: 24px; margin-left: 24px"
+      >
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+
+      <p>
+        Pagina desenvolvida por: Alessandro Gabriel Jandoza Grella. instagram:
+        alessandr0_gabriel.
+      </p>
+    </footer>
+    <div id="toast" class="toast">Item adicionado ao pedido!</div>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <div id="modalPedido" class="modal">
+      <div class="modal-content">
+        <h3>Seu Pedido</h3>
+        <ul id="listaPedido"></ul>
+        <p
+          class="total"
+          id="totalPedidoModal"
+          style="color: #ffffff; font-weight: bold; margin: 10px 0"
+        ></p>
+        <div class="containerBTN">
+          <button class="btnFechar" onclick="fecharModalPedido()">
+            Fechar
+          </button>
+          <button
+            id="btn-finalizar"
+            onclick="finalizarPedido()"
+            class="btn-finalizar"
+          >
+            Finalizar <br />
+            Pedido
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalPagamento" class="modal">
+      <div class="modal-content">
+        <p class="total">
+          Total do Pedido:
+          <strong>R$ <span id="totalPagamento">0,00</span></strong>
+        </p>
+        <h3>Selecione a forma de pagamento</h3>
+        <div class="modal-buttons">
+          <button onclick="selecionarPagamento('Dinheiro')">Dinheiro</button>
+          <button onclick="selecionarPagamento('Pix')">Pix</button>
+          <button
+            style="margin-bottom: 15px"
+            onclick="selecionarPagamento('Cartão')"
+          >
+            Cartão
+          </button>
+        </div>
+        <button class="btnFechar" onclick="fecharModalPagamento()">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
